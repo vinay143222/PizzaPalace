@@ -1,9 +1,10 @@
 import React, { useEffect, useReducer, useState } from 'react'
-import Button from 'react-bootstrap/Button';
 
-import {Link} from 'react-router-dom';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import axios from 'axios';
+import Product from '../components/Product';
 const reducer=(state,action)=>{
     switch(action.type)
     {
@@ -43,23 +44,20 @@ function Home() {
                 
                 {
                  loading ? (<div>Loading ...</div>):(
-                pizzas.map((Pizza) => {
+                   <Row>
+                { pizzas.map((Pizza) => {
                     return (
-                        <div className="product">
-                            <Link to={`/product/${Pizza.id}`}>
-                                <img src={Pizza.image} alt={Pizza.name} />
-                            </Link>
-                            <div className="product-info">
-                                <p>{Pizza.name}</p>
-                                <div className="product-varient">
-                                <h6><span>Varient</span>:{Pizza.varients[0]}</h6>
-                                <h6>Rs {Pizza.prices[0].small}</h6>
-                                     </div>
-                                <Button variant="danger"> Add to Cart</Button>
-                            </div>
-                        </div>
+                        <Col  key={Pizza.id}sm={6} md={4} lg={3} className="mb-3">
+                       <Product Pizza={Pizza}></Product>
+                    </Col>
                     )
-                }))}
+
+                })
+            }
+            </Row>
+                
+                )}
+               
                 
             </div>
             
