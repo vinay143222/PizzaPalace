@@ -12,8 +12,8 @@ function Product(props) {
                     <img src={Pizza.image} alt={Pizza.name} />
                 </Link>
                 <Card.Body>
-                    <Link to={`/product/${Pizza.id}`}>
-                        <Card.Title>{Pizza.name}</Card.Title>
+                    <Link to={`/product/${Pizza.id}`} style={{textDecoration:'none'}}>
+                        <Card.Text>{Pizza.name}</Card.Text>
                     </Link>
                     <div className="product-varient">
                     <Card.Text> <span>Varient</span>:{Pizza.varients[0]}</Card.Text>

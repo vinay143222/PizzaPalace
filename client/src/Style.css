@@ -53,3 +53,8 @@ main {
 .site-container {
     min-height: 100vh;
 }
+
+.img-large {
+    max-width: 100%;
+    text-align: center;
+}

@@ -1,5 +1,5 @@
-import React, { useEffect, useReducer, useState } from 'react'
-
+import React, { useEffect, useReducer } from 'react'
+import {Helmet} from 'react-helmet-async';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -39,6 +39,7 @@ function Home() {
    
     return (
         <div>
+            <Helmet><title>PIZZA PALACE</title></Helmet>
             <h1 style={{ textAlign: 'center' }}>PIZZA MENU</h1>
             <div className="products">
                 
