@@ -58,3 +58,11 @@ main {
     max-width: 100%;
     text-align: center;
 }
+
+.img-thumbnali {
+    height: 80px;
+}
+
+.varient-container {
+    display: flex;
+}

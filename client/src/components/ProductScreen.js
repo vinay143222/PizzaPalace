@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useReducer } from 'react'
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -17,7 +17,9 @@ function ProductScreen() {
     const {id}=params;
     const {state,dispatch:ctxDispatch}=useContext(Store);
     const {cart}=state;
-    const addToCart = async()=>{
+    const navigate=useNavigate();
+    const AddToCart = async()=>{
+         
         const existItem=cart.cartItems.find((x)=>x.id===pizzas.id);
         const quantity=existItem ? existItem.quantity+1:1;
         const {data}=await axios.get(`/api/products/${pizzas.id}`);
@@ -26,7 +28,8 @@ function ProductScreen() {
             window.alert('Sorry Product is out of Stock')
             return ;
         }
-     ctxDispatch({type:'CART_ADD_ITEM',payload:{...pizzas,quantity}})
+     ctxDispatch({type:'CART_ADD_ITEM',payload:{...pizzas,quantity}});
+      navigate('/cart');
     }
     const reducer=(state,action)=>{
     switch(action.type)
@@ -111,7 +114,7 @@ useEffect(() => {
                         </ListGroup.Item>
                         {pizzas.countInStock>0 &&(<ListGroup.Item>
                             <div className="d-grid">
-                                <Button variant="danger" onClick={addToCart}>Add to Cart</Button>
+                                <Button variant="danger" onClick={AddToCart}>Add to Cart</Button>
                             </div>
                         </ListGroup.Item>)}
                     </Card.Body>
