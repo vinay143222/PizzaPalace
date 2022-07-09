@@ -2,9 +2,10 @@ import React, { useEffect, useReducer } from 'react'
 import {Helmet} from 'react-helmet-async';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import LoadingBox from './LoadingBox';
 import axios from 'axios';
 import Product from '../components/Product';
+import MessageBox from './MessageBox';
 const reducer=(state,action)=>{
     switch(action.type)
     {
@@ -44,7 +45,7 @@ function Home() {
             <div className="products">
                 
                 {
-                 loading ? (<div>Loading ...</div>):(
+                 loading ? (<LoadingBox/>): pizzas ?(
                    <Row>
                 { pizzas.map((Pizza) => {
                     return (
@@ -57,7 +58,7 @@ function Home() {
             }
             </Row>
                 
-                )}
+                ):(<MessageBox variant="danger">{error}</MessageBox>)}
                
                 
             </div>

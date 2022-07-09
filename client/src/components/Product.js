@@ -13,7 +13,7 @@ function Product(props) {
                 </Link>
                 <Card.Body>
                     <Link to={`/product/${Pizza.id}`} style={{textDecoration:'none'}}>
-                        <Card.Text>{Pizza.name}</Card.Text>
+                        <Card.Text style={{color:'black'}} className="text-center">{Pizza.name}</Card.Text>
                     </Link>
                     <div className="product-varient">
                     <Card.Text> <span>Varient</span>:{Pizza.varients[0]}</Card.Text>

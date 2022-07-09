@@ -9,6 +9,8 @@ import Button from 'react-bootstrap/esm/Button';
 import Badge from 'react-bootstrap/Badge';
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem';
 import {Helmet} from 'react-helmet-async';
+import LoadingBox from './LoadingBox';
+import MessageBox from './MessageBox';
 function ProductScreen() {
     const params=useParams();
     const {id}=params;
@@ -42,7 +44,7 @@ useEffect(() => {
         fetchData();
     }, [id])
     
-    return loading ? (<div>loading...</div>):
+    return loading ? (<LoadingBox/>):pizzas ?
     (<div>
         <Row>
             <Col md={6} className="img-large">
@@ -103,7 +105,7 @@ useEffect(() => {
                     
             </Col>
         </Row>
-    </div>)
+    </div>):(<MessageBox variant="danger">{error}</MessageBox>)
 }
 
 export default ProductScreen
