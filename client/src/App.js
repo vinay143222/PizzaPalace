@@ -3,41 +3,32 @@ import {
    BrowserRouter,
    Routes,
    Route,
+   Link
 } from "react-router-dom";
-import Pizzas from './data';
-import Button from 'react-bootstrap/Button';
+
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Style.css';
-function App(props) {
-   const [qunatity,setqunatity]=useState(1);
-   const [varient,setvarient]=useState('small');
+import HomeScreen from './components/HomeScreen';
+import ProductScreen from './components/ProductScreen';
+function App() {
+
  
    return (
+      <BrowserRouter>
       <div>
          <header className="App-header">
-            <a href="/">PIZZA PALACE</a>
+            <Link to="/">PIZZA PALACE</Link>
          </header>
          <main>
-            <h1 style={{textAlign:'center'}}>PIZZA MENU</h1>
-            <div className="products">
-            {Pizzas.map((Pizza)=>{
-               return (
-               <div  className="product">
-                  <a href={`/product/${Pizza.id}`}>
-                  <img src={Pizza.image} alt={Pizza.name}/>
-                  </a>
-                  <div className="product-info">
-                  <p>{Pizza.name}</p>
-                  <h6>Rs {Pizza.prices[0].small}</h6>
-                  
-                  <Button variant="danger"> Add to Cart</Button>
-                  </div>
-               </div>
-               )
-            })}
-            </div>
+            <Routes>
+               <Route path="/product/:id" element={<ProductScreen/>}></Route>
+               <Route path="/" element={<HomeScreen/>}></Route>
+            </Routes>
+           
          </main>
       </div>
+      </BrowserRouter>
    )
 }
 

@@ -43,3 +43,8 @@ main {
 .flex-container {
     display: flex;
 }
+
+.product-varient {
+    display: flex;
+    justify-content: space-between;
+}
