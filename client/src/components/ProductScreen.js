@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useContext, useEffect, useReducer } from 'react'
 import {useParams} from 'react-router-dom';
 import axios from 'axios';
 import Row from 'react-bootstrap/Row';
@@ -11,9 +11,14 @@ import ListGroupItem from 'react-bootstrap/esm/ListGroupItem';
 import {Helmet} from 'react-helmet-async';
 import LoadingBox from './LoadingBox';
 import MessageBox from './MessageBox';
+import { Store } from '../Store';
 function ProductScreen() {
     const params=useParams();
     const {id}=params;
+    const {state,dispatch:ctxDispatch}=useContext(Store);
+    const addToCart =()=>{
+     ctxDispatch({type:'CART_ADD_ITEM',payload:{...pizzas,quantity:1}})
+    }
     const reducer=(state,action)=>{
     switch(action.type)
     {
@@ -97,7 +102,7 @@ useEffect(() => {
                         </ListGroup.Item>
                         {pizzas.countInStock>0 &&(<ListGroup.Item>
                             <div className="d-grid">
-                                <Button variant="danger">Add to Cart</Button>
+                                <Button variant="danger" onClick={addToCart}>Add to Cart</Button>
                             </div>
                         </ListGroup.Item>)}
                     </Card.Body>
