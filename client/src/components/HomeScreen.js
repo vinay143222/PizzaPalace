@@ -42,7 +42,7 @@ function Home() {
             <div className="products">
                 
                 {
-                 loading ? (<div>Loading ...</div>):error?(<div>error</div>):(
+                 loading ? (<div>Loading ...</div>):(
                 pizzas.map((Pizza) => {
                     return (
                         <div className="product">

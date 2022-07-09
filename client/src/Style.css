@@ -17,6 +17,7 @@ header a {
 
 main {
     padding: 1rem;
+    flex: 1;
 }
 
 .products {
@@ -47,4 +48,8 @@ main {
 .product-varient {
     display: flex;
     justify-content: space-between;
+}
+
+.site-container {
+    min-height: 100vh;
 }
