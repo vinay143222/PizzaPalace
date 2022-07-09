@@ -16,8 +16,17 @@ function ProductScreen() {
     const params=useParams();
     const {id}=params;
     const {state,dispatch:ctxDispatch}=useContext(Store);
-    const addToCart =()=>{
-     ctxDispatch({type:'CART_ADD_ITEM',payload:{...pizzas,quantity:1}})
+    const {cart}=state;
+    const addToCart = async()=>{
+        const existItem=cart.cartItems.find((x)=>x.id===pizzas.id);
+        const quantity=existItem ? existItem.quantity+1:1;
+        const {data}=await axios.get(`/api/products/${pizzas.id}`);
+        if(data.countInStock<quantity)
+        {
+            window.alert('Sorry Product is out of Stock')
+            return ;
+        }
+     ctxDispatch({type:'CART_ADD_ITEM',payload:{...pizzas,quantity}})
     }
     const reducer=(state,action)=>{
     switch(action.type)
