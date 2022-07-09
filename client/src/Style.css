@@ -1,0 +1,16 @@
+body {
+    overflow-x: hidden;
+}
+
+header {
+    background-color: white;
+    color: black;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 1rem;
+}
+
+header a {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
