@@ -10,12 +10,21 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import '../Style.css';
 import Button from 'react-bootstrap/esm/Button';
 import Card from 'react-bootstrap/Card';
-
+import axios from 'axios';
 function CartScreen() {
     const {state,dispatch:ctxDispatch}=useContext(Store);
     const { cart:{cartItems}, }=state;
     const [varient,setvarient]=useState('small');
-   
+   const UpdateCartHandler=async(item,quantity)=>{
+       const {data}=await axios.get(`/api/products/${item.id}`);
+         
+        if(data.countInStock<quantity)
+        {
+            window.alert('Sorry Product is out of Stock')
+            return ;
+        }
+         ctxDispatch({type:'CART_ADD_ITEM',payload:{...item,quantity}});
+   }
     return (
         <div>
             <Helmet><title>PIZZA Cart</title></Helmet>
@@ -34,11 +43,11 @@ function CartScreen() {
                                     <Link to={`/product/${item.id}`} style={{color:'black',textDecoration:'none'}}><p>{item.name}</p></Link>
                                 </Col>
                                 <Col md={3}>
-                                    <Button variant="light" disabled={item.quantity===1}>
+                                    <Button variant="light" disabled={item.quantity===1} onClick={()=>UpdateCartHandler(item, item.quantity-1)}>
                                         <i className="fas fa-minus-circle"></i>
                                     </Button>
                                     <span>{item.quantity}</span>
-                                    <Button variant="light" disabled={item.quantity===item.countInStock}>
+                                    <Button variant="light" disabled={item.quantity===item.countInStock} onClick={()=>UpdateCartHandler(item, item.quantity+1)}>
                                         <i className="fas fa-plus-circle"></i>
                                     </Button>
                                    
