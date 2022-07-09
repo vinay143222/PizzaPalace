@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
-import Pizzas from '../data';
+
 import {Link} from 'react-router-dom';
+
+import axios from 'axios';
 function Home() {
+    const [pizzas,setpizza]=useState([]);
+
+    useEffect(() => {
+        const fetchData=async()=>{
+            const result=await axios.get('/api/products');
+            setpizza(result.data);
+        };
+        fetchData();
+    }, [])
+    console.log(pizzas)
     return (
         <div>
             <h1 style={{ textAlign: 'center' }}>PIZZA MENU</h1>
             <div className="products">
-                {Pizzas.map((Pizza) => {
+                {pizzas.map((Pizza) => {
                     return (
                         <div className="product">
                             <Link to={`/product/${Pizza.id}`}>

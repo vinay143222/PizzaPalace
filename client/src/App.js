@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {
    BrowserRouter,
    Routes,
@@ -7,7 +8,7 @@ import {
 } from "react-router-dom";
 
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import './Style.css';
 import HomeScreen from './components/HomeScreen';
 import ProductScreen from './components/ProductScreen';

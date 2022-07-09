@@ -1,14 +1,14 @@
 const Pizza = [{
-        id: '1',
+        id: '0',
         name: 'MARGHERITA',
         varients: ['small', 'medium', 'large'],
         prices: [{ small: '200', medium: '350', large: '400' }],
         category: 'veg',
         image: 'https://www.dominos.co.in/files/items/Margherit.jpg',
         description: 'A hugely popular margherita, with a deliciously tangy single cheese topping',
-    }, ,
+    },
     {
-        id: '2',
+        id: '1',
         name: 'FARM HOUSE',
         varients: ['small', 'medium', 'large'],
         prices: [{ small: '200', medium: '300', large: '450' }],
@@ -17,7 +17,7 @@ const Pizza = [{
         description: 'A pizza that goes ballistic on veggies! Check out this mouth watering overload of crunchy, crisp capsicum, succulent mushrooms and fresh tomatoes',
     },
     {
-        id: '3',
+        id: '2',
         name: 'PEPPY PANEER',
         varients: ['small', 'medium', 'large'],
         prices: [{ small: '200', medium: '400', large: '700' }],
@@ -26,7 +26,7 @@ const Pizza = [{
         description: 'Peeper Barbecue Chicken I cheese',
     },
     {
-        id: '4',
+        id: '3',
         name: 'PEPPER BARBECUE CHICKEN',
         varients: ['small', 'medium', 'large'],
         prices: [{ small: '200', medium: '350', large: '400' }],
@@ -35,7 +35,7 @@ const Pizza = [{
         description: 'Peeper Barbecue Chicken I cheese',
     },
     {
-        id: '5',
+        id: '4',
         name: 'CHICKEN SAUSAGE',
         varients: ['small', 'medium', 'large'],
         prices: [{ small: '200', medium: '350', large: '400' }],
@@ -44,7 +44,7 @@ const Pizza = [{
         description: 'Chicken Sausage I Cheese',
     },
     {
-        id: '6',
+        id: '5',
         name: 'CHICKEN GOLDEN DELIGHT',
         varients: ['small', 'medium', 'large'],
         prices: [{ small: '200', medium: '350', large: '400' }],
@@ -53,7 +53,7 @@ const Pizza = [{
         description: 'Mmm! Barbeque chicken with a topping of golden corn loaded with extra cheese. Worth its weight in gold!',
     },
     {
-        id: '7',
+        id: '6',
         name: 'NON VEG SUPREME',
         varients: ['small', 'medium', 'large'],
         prices: [{ small: '200', medium: '350', large: '400' }],
