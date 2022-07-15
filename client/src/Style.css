@@ -66,3 +66,11 @@ main {
 .varient-container {
     display: flex;
 }
+
+.small-container {
+    max-width: 600px;
+}
+
+.sigin-card {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
