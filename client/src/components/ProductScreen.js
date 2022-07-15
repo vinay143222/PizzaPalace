@@ -82,7 +82,7 @@ useEffect(() => {
                             <h6> PIZZA :<span>{pizzas.name}</span></h6>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <h6> RS :{pizzas.prices[0].small}</h6>
+                            <h6> RS :{pizzas.prices}</h6>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <p>Description: {pizzas.description}</p>
@@ -101,7 +101,7 @@ useEffect(() => {
                         <ListGroup.Item>
                             <Row>
                                 <Col>Price:</Col>
-                                <Col>RS {pizzas.prices[0].small}</Col>
+                                <Col>RS {pizzas.prices}</Col>
                             </Row>
                         </ListGroup.Item>
                         <ListGroup.Item>

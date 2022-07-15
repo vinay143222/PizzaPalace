@@ -14,7 +14,8 @@ import axios from 'axios';
 function CartScreen() {
     const {state,dispatch:ctxDispatch}=useContext(Store);
     const { cart:{cartItems}, }=state;
-    const [varient,setvarient]=useState('small');
+
+  
    const UpdateCartHandler=async(item,quantity)=>{
        const {data}=await axios.get(`/api/products/${item.id}`);
          
@@ -25,6 +26,10 @@ function CartScreen() {
         }
          ctxDispatch({type:'CART_ADD_ITEM',payload:{...item,quantity}});
    }
+   const removeItemHandler=async(item)=>{
+     ctxDispatch({type:'CART_REMOVE_ITEM',payload:item})
+   }
+    
     return (
         <div>
             <Helmet><title>PIZZA Cart</title></Helmet>
@@ -52,23 +57,10 @@ function CartScreen() {
                                     </Button>
                                    
                                 </Col>
-                                 <Col md={2}>Rs{item.prices[0][varient]*item.quantity}</Col>
-                                 <Col md={3}>
-                                    <div className="varient-container">
-                                        <div>
-                                            varients :
-                                        </div>
-                                    <div>
-                                    <select onChange={(e)=>{setvarient(e.target.value)}}>
-                                    {item.varients.map((varient)=>{
-                                        return <option value={varient}>{varient}</option>
-                                    })}
-                                 </select>
-                                 </div>
-                                 </div>
-                                 </Col>
+                                 <Col md={3}>Rs{item.prices*item.quantity}</Col>
+                                 
                                  <Col md={1}>
-                                    <Button variant="light">
+                                    <Button variant="light" onClick={()=>removeItemHandler(item)}>
                                         <i className="fas fa-trash"></i>
                                     </Button>
                                  </Col>
@@ -83,7 +75,7 @@ function CartScreen() {
                  <ListGroup variant="flush">
                   <ListGroup.Item>
                     <h3>SubTotal ({cartItems.reduce((a,c)=>a+c.quantity,0)} {''}items)
-                    RS :{cartItems.reduce((a,c)=>a+c.prices[0][varient]*c.quantity,0)}</h3>
+                    RS :{cartItems.reduce((a,c)=>a+c.prices*c.quantity,0)}</h3>
                     
                   </ListGroup.Item>
                   <ListGroup.Item>
