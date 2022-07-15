@@ -17,9 +17,9 @@ function Product(props) {
                     </Link>
                     <div className="product-varient">
                     <Card.Text> <span>Varient</span>:{Pizza.varients[0]}</Card.Text>
-                        <Card.Text>Rs {Pizza.prices[0].small}</Card.Text>
+                        <Card.Text>Rs {Pizza.prices}</Card.Text>
                     </div>
-                    <Button variant="danger" className="text-center"> Add to Cart</Button>
+                    <Button variant="danger" className="text-center" > Add to Cart</Button>
                 </Card.Body>
         </Card>
       
