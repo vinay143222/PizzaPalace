@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import {useNavigate} from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import {Store} from '../Store';
 import {Helment} from 'react-helmet-async';
@@ -14,7 +15,7 @@ import axios from 'axios';
 function CartScreen() {
     const {state,dispatch:ctxDispatch}=useContext(Store);
     const { cart:{cartItems}, }=state;
-
+   const navigate=useNavigate()
   
    const UpdateCartHandler=async(item,quantity)=>{
        const {data}=await axios.get(`/api/products/${item.id}`);
@@ -28,6 +29,9 @@ function CartScreen() {
    }
    const removeItemHandler=async(item)=>{
      ctxDispatch({type:'CART_REMOVE_ITEM',payload:item})
+   }
+   const CheckoutHandler=()=>{
+    navigate('/signin?redirect=/shipping');
    }
     
     return (
@@ -80,7 +84,7 @@ function CartScreen() {
                   </ListGroup.Item>
                   <ListGroup.Item>
                     <div className="d-grid">
-                    <Button type="button" variant="danger" disabled={cartItems.length===0}>Proceed to Checkout</Button>
+                    <Button type="button" variant="danger" disabled={cartItems.length===0} onClick={CheckoutHandler}>Proceed to Checkout</Button>
                     </div>
                   </ListGroup.Item>
                  </ListGroup>

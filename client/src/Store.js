@@ -4,7 +4,7 @@ import { createContext } from "react";
 export const Store = createContext();
 const initialState={
     cart:{
-        cartItems:[]
+        cartItems:localStorage.getItem('cartItems')?JSON.parse(localStorage.getItem('cartItems')):[],
     }
 }
 function reducer(state,action)
@@ -16,9 +16,11 @@ function reducer(state,action)
  const newItem=action.payload;
          const existItem=state.cart.cartItems.find((item)=>item.id===newItem.id);
          const cartItems=existItem?state.cart.cartItems.map((item)=>item.id===existItem.id?newItem:item):[...state.cart.cartItems,newItem];
+         localStorage.setItem('cartItems',JSON.stringify(cartItems));
             return {...state,cart:{...state.cart,cartItems}};
             case 'CART_REMOVE_ITEM':{
                 const cartItems=state.cart.cartItems.filter((item)=>item.id!==action.payload.id);
+                localStorage.setItem('cartItems',JSON.stringify(cartItems));
                   return {...state,cart:{...state.cart,cartItems}}
             }
           

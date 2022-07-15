@@ -1,10 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
+import axios from 'axios';
+import {Store} from '../Store';
+
 function Product(props) {
     const { Pizza } = props;
-   
+       const {state,dispatch:ctxDispatch}=useContext(Store);
+    const { cart:{cartItems}, }=state;
+   const addtoCartHandler=async(item)=>{
+     const existItem=cartItems.find((x)=>x.id===Pizza.id);
+        const quantity=existItem ? existItem.quantity+1:1;
+       const {data}=await axios.get(`/api/products/${item.id}`);
+         
+        if(data.countInStock<quantity)
+        {
+            window.alert('Sorry Product is out of Stock')
+            return ;
+        }
+         ctxDispatch({type:'CART_ADD_ITEM',payload:{...item,quantity}});
+   }
+  
     return (
         <div>
             <Card className="product">
@@ -19,7 +36,11 @@ function Product(props) {
                     <Card.Text> <span>Varient</span>:{Pizza.varients[0]}</Card.Text>
                         <Card.Text>Rs {Pizza.prices}</Card.Text>
                     </div>
-                    <Button variant="danger" className="text-center" > Add to Cart</Button>
+                    {Pizza.countInStock===0?
+                    <Button variant="light" className="text-center" disabled >Out of Stock</Button>:
+                    <Button variant="danger" className="text-center" onClick={()=>addtoCartHandler(Pizza)} > Add to Cart</Button>
+                    }
+                    
                 </Card.Body>
         </Card>
       
