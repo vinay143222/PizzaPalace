@@ -15,14 +15,15 @@ import { Store } from '../Store';
 function ProductScreen() {
     const params=useParams();
     const {id}=params;
+  
     const {state,dispatch:ctxDispatch}=useContext(Store);
     const {cart}=state;
     const navigate=useNavigate();
     const AddToCart = async()=>{
          
-        const existItem=cart.cartItems.find((x)=>x.id===pizzas.id);
+        const existItem=cart.cartItems.find((x)=>x._id===pizzas._id);
         const quantity=existItem ? existItem.quantity+1:1;
-        const {data}=await axios.get(`/api/products/${pizzas.id}`);
+        const {data}=await axios.get(`/api/products/${pizzas._id}`);
         if(data.countInStock<quantity)
         {
             window.alert('Sorry Product is out of Stock')

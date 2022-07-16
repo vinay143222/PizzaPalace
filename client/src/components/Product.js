@@ -22,14 +22,15 @@ function Product(props) {
          ctxDispatch({type:'CART_ADD_ITEM',payload:{...item,quantity}});
    }
   
+  
     return (
         <div>
             <Card className="product">
-                <Link to={`/product/${Pizza.id}`}>
+                <Link to={`/product/${Pizza._id}`}>
                     <img src={Pizza.image} alt={Pizza.name} />
                 </Link>
                 <Card.Body>
-                    <Link to={`/product/${Pizza.id}`} style={{textDecoration:'none'}}>
+                    <Link to={`/product/${Pizza._id}`} style={{textDecoration:'none'}}>
                         <Card.Text style={{color:'black',}} className="text-center">{Pizza.name}</Card.Text>
                     </Link>
                     <div className="product-varient">

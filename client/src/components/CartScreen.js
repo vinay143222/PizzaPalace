@@ -18,7 +18,7 @@ function CartScreen() {
    const navigate=useNavigate()
   
    const UpdateCartHandler=async(item,quantity)=>{
-       const {data}=await axios.get(`/api/products/${item.id}`);
+       const {data}=await axios.get(`/api/products/${item._id}`);
          
         if(data.countInStock<quantity)
         {
@@ -45,11 +45,11 @@ function CartScreen() {
                     (<ListGroup>
                         {cartItems.map((item)=>{
                             return (
-                        <ListGroup.Item key={item.id}>
+                        <ListGroup.Item key={item._id}>
                             <Row className="align-items-center">
                                 <Col md={3}>
                                     <img src={item.image} alt={item.name} className="img-fluid rounded img-thumbnali"/>
-                                    <Link to={`/product/${item.id}`} style={{color:'black',textDecoration:'none'}}><p>{item.name}</p></Link>
+                                    <Link to={`/product/${item._id}`} style={{color:'black',textDecoration:'none'}}><p>{item.name}</p></Link>
                                 </Col>
                                 <Col md={3}>
                                     <Button variant="light" disabled={item.quantity===1} onClick={()=>UpdateCartHandler(item, item.quantity-1)}>

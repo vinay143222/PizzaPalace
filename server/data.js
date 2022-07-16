@@ -1,5 +1,5 @@
 const Pizza = [{
-        id: '0',
+
         name: 'MARGHERITA',
         varients: ['small', 'medium', 'large'],
         prices: '200',
@@ -9,7 +9,7 @@ const Pizza = [{
         description: 'A hugely popular margherita, with a deliciously tangy single cheese topping',
     },
     {
-        id: '1',
+
         name: 'FARM HOUSE',
         varients: ['small', 'medium', 'large'],
         prices: '300',
@@ -19,7 +19,7 @@ const Pizza = [{
         description: 'A pizza that goes ballistic on veggies! Check out this mouth watering overload of crunchy, crisp capsicum, succulent mushrooms and fresh tomatoes',
     },
     {
-        id: '2',
+
         name: 'PEPPY PANEER',
         varients: ['small', 'medium', 'large'],
         prices: '400',
@@ -29,7 +29,7 @@ const Pizza = [{
         description: 'Peeper Barbecue Chicken I cheese',
     },
     {
-        id: '3',
+
         name: 'PEPPER BARBECUE CHICKEN',
         varients: ['small', 'medium', 'large'],
         prices: '400',
@@ -39,7 +39,7 @@ const Pizza = [{
         description: 'Peeper Barbecue Chicken I cheese',
     },
     {
-        id: '4',
+
         name: 'CHICKEN SAUSAGE',
         varients: ['small', 'medium', 'large'],
         prices: '400',
@@ -49,7 +49,7 @@ const Pizza = [{
         description: 'Chicken Sausage I Cheese',
     },
     {
-        id: '5',
+
         name: 'CHICKEN GOLDEN DELIGHT',
         varients: ['small', 'medium', 'large'],
         prices: '400',
@@ -59,7 +59,7 @@ const Pizza = [{
         description: 'Mmm! Barbeque chicken with a topping of golden corn loaded with extra cheese. Worth its weight in gold!',
     },
     {
-        id: '6',
+
         name: 'NON VEG SUPREME',
         varients: ['small', 'medium', 'large'],
         prices: '300',
