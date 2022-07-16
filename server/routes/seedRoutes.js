@@ -1,5 +1,6 @@
 import express from 'express';
 import Pizza from '../models/Pizza.js';
+
 import data from '../data.js';
 const seedRouter = express.Router();
 seedRouter.get('/', async(req, res) => {
