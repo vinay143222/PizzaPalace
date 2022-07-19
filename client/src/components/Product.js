@@ -10,9 +10,9 @@ function Product(props) {
        const {state,dispatch:ctxDispatch}=useContext(Store);
     const { cart:{cartItems}, }=state;
    const addtoCartHandler=async(item)=>{
-     const existItem=cartItems.find((x)=>x.id===Pizza.id);
+     const existItem=cartItems.find((x)=>x._id===Pizza._id);
         const quantity=existItem ? existItem.quantity+1:1;
-       const {data}=await axios.get(`/api/products/${item.id}`);
+       const {data}=await axios.get(`/api/products/${item._id}`);
          
         if(data.countInStock<quantity)
         {
