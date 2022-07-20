@@ -16,6 +16,7 @@ import CartScreen from './components/CartScreen';
 import SigninScreen from './components/SigninScreen';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import ShippingScreen from './components/ShippingScreen';
+import SignupScreen from './components/SignupScreen';
 function App() {
 const {state,dispatch:ctxDispatch}=useContext(Store);
 const {cart,userInfo}=state;
@@ -69,6 +70,7 @@ const {cart,userInfo}=state;
                <Route path="/" element={<HomeScreen/>}></Route>
                <Route path="/signin" element={<SigninScreen/>}></Route>
                <Route path="/shipping" element={<ShippingScreen/>}></Route>
+               <Route path="/signup" element={<SignupScreen/>}></Route>
             </Routes>
            </Container>
          </main>
