@@ -15,6 +15,7 @@ import { Store } from './Store';
 import CartScreen from './components/CartScreen';
 import SigninScreen from './components/SigninScreen';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import ShippingScreen from './components/ShippingScreen';
 function App() {
 const {state,dispatch:ctxDispatch}=useContext(Store);
 const {cart,userInfo}=state;
@@ -40,7 +41,7 @@ const {cart,userInfo}=state;
                   {cart.cartItems.length>0&&(<Badge pill bg="danger">{cart.cartItems.reduce((a,c)=>a + c.quantity,0)}</Badge>)}
                 </Link>
                 {userInfo ?(
-                  <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                  <NavDropdown title={userInfo.name} id="basic-nav-dropdown"   >
                      <LinkContainer to="/profile">
                         <NavDropdown.Item>My Profile</NavDropdown.Item>
                      </LinkContainer>
@@ -67,6 +68,7 @@ const {cart,userInfo}=state;
                <Route path="/product/:id" element={<ProductScreen/>}></Route>
                <Route path="/" element={<HomeScreen/>}></Route>
                <Route path="/signin" element={<SigninScreen/>}></Route>
+               <Route path="/shipping" element={<ShippingScreen/>}></Route>
             </Routes>
            </Container>
          </main>
