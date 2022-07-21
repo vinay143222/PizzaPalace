@@ -10,7 +10,7 @@ export default function PaymentScreen() {
     const navigate=useNavigate();
     const {state,dispatch:ctxDispatch}=useContext(Store);
     const {cart:{shippingAddress,paymentMethod},}=state;
-    console.log(paymentMethod);
+    
     const [PaymentMethodName,setPaymentMethod]=useState(paymentMethod||'PayPal')
     useEffect(() => {
         if(!shippingAddress.address)

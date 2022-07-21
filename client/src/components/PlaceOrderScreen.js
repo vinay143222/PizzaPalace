@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useReducer } from 'react';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import { Helmet } from 'react-helmet-async';
@@ -8,8 +8,23 @@ import { Link, useNavigate } from 'react-router-dom';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Store } from '../Store';
 import Button from 'react-bootstrap/esm/Button';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import LoadingBox from './LoadingBox';
+const reducer=(state,action)=>{
+    switch(action.type){
+        case 'CREATE_REQUEST':return {...state,loading:true};
+        case 'CREATE_SUCCESS':return{...state,loading:false};
+        case 'CREATE_FAIL':return {...state,loading:false};
+        default :return state;  
+    }
+}
 export default function PlaceOrderScreen() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [{loading},dispatch]=useReducer(reducer,{
+        loading:false,
+     
+    })
     const {state,dispatch:ctxDispatch}=useContext(Store);
     const {cart,userInfo}=state;
     useEffect(() => {
@@ -23,8 +38,29 @@ export default function PlaceOrderScreen() {
     cart.shippingPrice=cart.itemsPrice>100?round2(2):round2(10);
     cart.taxPrice=round2(0.15*cart.itemsPrice);
     cart.totalPrice=cart.itemsPrice+cart.shippingPrice+cart.taxPrice;
-    const placeOrderHandler=()=>{
-
+    const placeOrderHandler=async()=>{
+      try {
+         dispatch({type:'CREATE_REQUEST'});
+         const {data}=await axios.post('/api/orders',{
+            orderItems:cart.cartItems,
+        shippingAddress:cart.shippingAddress,
+      paymentMethod:cart.paymentMethod,
+    itemsPrice:cart.itemsPrice,
+   shippingPrice:cart.shippingPrice,
+      taxPrice:cart.taxPrice,
+    totalPrice:cart.totalPrice},
+    {
+        headers:{authorization:`Bearer${userInfo.token}`,
+    }
+    });
+    ctxDispatch({ type: 'CART_CLEAR'});
+    dispatch({type:'CREATE_SUCCESS'});
+    localStorage.removeItem('cartItems');
+    navigate(`/order/${data.order._id}`);
+      } catch (error) {
+         dispatch({type:'CREATE_FAIL'});
+         toast.error(error);
+      }
     }
     return (
         <div>
@@ -32,10 +68,10 @@ export default function PlaceOrderScreen() {
             <Helmet>
                 <title>PlaceOrder</title>
             </Helmet>
-            <h1 className="my-3" style={{ textAlign: 'center' }}>Preview Order</h1>
+            <h1 className="my-3 " style={{ textAlign: 'center' }}>Preview Order</h1>
             <Row>
                 <Col md={8}>
-                    <Card>
+                    <Card className="sigin-card">
                  <Card.Body>
                     <Card.Title>Shipping</Card.Title>
                     <Card.Text>
@@ -46,12 +82,12 @@ export default function PlaceOrderScreen() {
                     <Link to="/shipping">Edit</Link>
                  </Card.Body>
                  </Card>
-                 <Card className="mb-3">
+                 <Card className="mb-3 sigin-card mt-3" >
                     <Card.Title>Payment</Card.Title>
                     <Card.Text><strong>Method:</strong>{cart.paymentMethod}</Card.Text>
                     <Link to="/payment">Edit</Link>
                  </Card>
-                 <Card className="mb-3">
+                 <Card className="mb-3 sigin-card" >
                      <Card.Body>
                         <Card.Title>Items</Card.Title>
                         <ListGroup variant="flush">
@@ -62,7 +98,7 @@ export default function PlaceOrderScreen() {
                                     <img src={item.image} alt={item.name} className="img-fluid rounded img-thumbnali"/>
                                     <Link to={`/product/${item._id}`}>{item.name}</Link>
                                 </Col>
-                                <Col md={3}><span>{item.quantity}</span></Col>
+                                <Col md={3}><span>quantity:{item.quantity}</span></Col>
                                 <Col md={3}>Rs{item.prices}</Col>
                                  </Row>
                                 </ListGroup.Item>
@@ -73,7 +109,7 @@ export default function PlaceOrderScreen() {
                  </Card>
                 </Col>
                 <Col md={4}>
-                    <Card>
+                    <Card className="sigin-card">
                         <Card.Body>
                             <Card.Title>Order Summary</Card.Title>
                             <ListGroup variant="flush">
@@ -102,9 +138,12 @@ export default function PlaceOrderScreen() {
                                     </Row>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
+                                    <div className="d-grid">
                                    <Button type="button" onClick={placeOrderHandler} disabled={cart.cartItems.length===0} variant="danger">
                                     Place Order
                                    </Button>
+                                   </div>
+                                   {loading&&<LoadingBox/>}
                                 </ListGroup.Item>
                             </ListGroup>
                         </Card.Body>

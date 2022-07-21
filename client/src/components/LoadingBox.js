@@ -8,4 +8,4 @@ function LoadingBox() {
     )
 }
 
-export default LoadingBox
+export default LoadingBox;
