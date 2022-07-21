@@ -19,6 +19,7 @@ import ShippingScreen from './components/ShippingScreen';
 import SignupScreen from './components/SignupScreen';
 import PaymentScreen from './components/PaymentScreen';
 import PlaceOrderScreen from './components/PlaceOrderScreen';
+import OrderScreen from './components/OrderScreen';
 function App() {
 const {state,dispatch:ctxDispatch}=useContext(Store);
 const {cart,userInfo}=state;
@@ -78,6 +79,7 @@ const {cart,userInfo}=state;
                <Route path="/signup" element={<SignupScreen/>}></Route>
                <Route path="/payment" element={<PaymentScreen/>}></Route>
                <Route path="/placeorder" element={<PlaceOrderScreen/>}></Route>
+               <Route path="/order/:id" element={<OrderScreen/>}></Route>
             </Routes>
            </Container>
          </main>
