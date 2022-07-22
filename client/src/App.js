@@ -20,6 +20,8 @@ import SignupScreen from './components/SignupScreen';
 import PaymentScreen from './components/PaymentScreen';
 import PlaceOrderScreen from './components/PlaceOrderScreen';
 import OrderScreen from './components/OrderScreen';
+import OrderHistoryScreen from './components/OrderHistoryScreen';
+
 function App() {
 const {state,dispatch:ctxDispatch}=useContext(Store);
 const {cart,userInfo}=state;
@@ -36,13 +38,15 @@ const {cart,userInfo}=state;
       <div className="d-flex flex-column site-container">
          <ToastContainer position="bottom-center" limit={1}/>
          <header className="App-header">
-            <Navbar bg="white" variant="white">
+            <Navbar bg="white" variant="white" expand="lg">
             <Container>
               
                <LinkContainer to="/">
                   <Navbar.Brand>PIZZA PALACE</Navbar.Brand>
                </LinkContainer>
-               <Nav className="me-right">
+               <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+               <Navbar.Collapse id="basic-navbar-nav">
+               <Nav className="me-auto w-100 justify-content-end">
                 <Link to="/cart" className="nav-link" style={{color:'black'}}>
                   Cart
                   {cart.cartItems.length>0&&(<Badge pill bg="danger">{cart.cartItems.reduce((a,c)=>a + c.quantity,0)}</Badge>)}
@@ -64,6 +68,7 @@ const {cart,userInfo}=state;
                SignIn</Link>
                 )}
                </Nav>
+              </Navbar.Collapse>
             </Container>
             </Navbar>
             
@@ -80,6 +85,7 @@ const {cart,userInfo}=state;
                <Route path="/payment" element={<PaymentScreen/>}></Route>
                <Route path="/placeorder" element={<PlaceOrderScreen/>}></Route>
                <Route path="/order/:id" element={<OrderScreen/>}></Route>
+               <Route path="/orderhistory" element={<OrderHistoryScreen/>}></Route>
             </Routes>
            </Container>
          </main>
