@@ -50,10 +50,6 @@ main {
     justify-content: space-between;
 }
 
-.site-container {
-    min-height: 100vh;
-}
-
 .img-large {
     max-width: 100%;
     text-align: center;
@@ -87,4 +83,38 @@ main {
 .checkout-steps>div.active {
     border-bottom: 0.2rem solid #f08000;
     color: #f08000;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.side-navbar {
+    width: 240px;
+    height: 100%;
+    position: absolute;
+    left: -300px;
+    background-color: white;
+    transition: 0.5s;
+}
+
+.site-container {
+    transition: 0.4s;
+}
+
+.active-cont {
+    margin-left: 240px;
+}
+
+.active-nav {
+    left: 0;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.btn-outline-primary {
+    background-color: red;
+    color: black
 }
