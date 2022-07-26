@@ -6,6 +6,11 @@ pizzaRouter.get('/', async(req, res) => {
     const Pizzas = await Pizza.find();
     res.send(Pizzas);
 })
+pizzaRouter.get("/search", expressAsyncHandler(async(req, res) => {
+    const category = req.query.category;
+    const pizzas = await Pizza.find({ category: req.query.category });
+    res.send(pizzas);
+}))
 pizzaRouter.get('/categories', expressAsyncHandler(async(req, res) => {
     const categories = await Pizza.find().distinct('category');
     res.send(categories);

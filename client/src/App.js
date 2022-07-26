@@ -24,7 +24,11 @@ import OrderHistoryScreen from './components/OrderHistoryScreen';
 import ProfileScreen from './components/ProfileScreen';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import SearchBox from './components/SearchBox';
+import Categoryitem from './components/Categoryitem';
+import Protectedroute from './components/Protectedroute';
+import Dashboardscreen from './components/Dashboardscreen';
+import AdminRoute from './components/AdminRoute';
+
 
 function App() {
 const {state,dispatch:ctxDispatch}=useContext(Store);
@@ -52,7 +56,7 @@ const fetchCategpry=async()=>{
 fetchCategpry();
 },[])
 
-console.log(sidebarIsOpen);
+
    return (
       <BrowserRouter>
       <div className={ sidebarIsOpen ?
@@ -70,7 +74,7 @@ console.log(sidebarIsOpen);
                </LinkContainer>
                <Navbar.Toggle aria-controls="basic-navbar-nav"><i className="fas fa-bars"></i></Navbar.Toggle>
                <Navbar.Collapse id="basic-navbar-nav">
-                 <SearchBox/>
+                 
                <Nav className="me-auto w-100 justify-content-end">
                 <Link to="/cart" className="nav-link" style={{color:'black'}}>
                   Cart
@@ -92,6 +96,22 @@ console.log(sidebarIsOpen);
                   
                SignIn</Link>
                 )}
+                {userInfo&&userInfo.isAdmin&&(
+                  <NavDropdown title="Admin" id="admin-nav-dropdown">
+                     <LinkContainer to="/admin/dashboard">
+                        <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                     </LinkContainer>
+                     <LinkContainer to="/admin/productlist">
+                        <NavDropdown.Item>Products</NavDropdown.Item>
+                     </LinkContainer>
+                     <LinkContainer to="/admin/orderlist">
+                        <NavDropdown.Item>orders</NavDropdown.Item>
+                     </LinkContainer>
+                     <LinkContainer to="/admin/userlist">
+                        <NavDropdown.Item>users</NavDropdown.Item>
+                     </LinkContainer>
+                  </NavDropdown>
+                )}
                </Nav>
               </Navbar.Collapse>
             </Container>
@@ -107,7 +127,7 @@ console.log(sidebarIsOpen);
            
             {categories.map((category)=>{
                return <Nav.Item key={category}>
-              <LinkContainer  to={`/search?category=${category}`} onClick={()=>setSidebarIsOpen(false)} style={{color:'black'}}>
+              <LinkContainer  to={`/search/${category}`} onClick={()=>setSidebarIsOpen(false)} style={{color:'black'}}>
                <Nav.Link >{category}</Nav.Link>
               </LinkContainer>
                </Nav.Item>
@@ -123,12 +143,17 @@ console.log(sidebarIsOpen);
                <Route path="/signin" element={<SigninScreen/>}></Route>
                <Route path="/shipping" element={<ShippingScreen/>}></Route>
                <Route path="/signup" element={<SignupScreen/>}></Route>
-               <Route path="/profile" element={<ProfileScreen/>}></Route>
+               <Route path="/profile" element={
+               <Protectedroute>
+               <ProfileScreen/>
+               </Protectedroute>}></Route>
                <Route path="/payment" element={<PaymentScreen/>}></Route>
                <Route path="/placeorder" element={<PlaceOrderScreen/>}></Route>
-               <Route path="/order/:id" element={<OrderScreen/>}></Route>
-               <Route path="/orderhistory" element={<OrderHistoryScreen/>}></Route>
-
+               <Route path="/order/:id" element={
+               <Protectedroute><OrderScreen/></Protectedroute>}></Route>
+               <Route path="/orderhistory" element={<Protectedroute><OrderHistoryScreen/></Protectedroute>}></Route>
+               <Route path="/search/:category" element={<Categoryitem/>}></Route>
+               <Route path="/admin/dashboard" element={<AdminRoute><Dashboardscreen/></AdminRoute>}></Route>
             </Routes>
            </Container>
          </main>
