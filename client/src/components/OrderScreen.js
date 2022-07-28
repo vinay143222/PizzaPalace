@@ -29,7 +29,7 @@ export default function OrderScreen() {
     const params=useParams();
     const {id:orderId}=params;
     const navigate=useNavigate();
-    const {userInfo}=state;
+    const {userInfo,paymentMethod}=state;
     const [{ loading, error, order,successPay,loadingPay }, dispatch] = useReducer(reducer, {
         loading: true,
         order: {},
@@ -197,14 +197,15 @@ export default function OrderScreen() {
                         </ListGroup.Item>
                         {!order.isPaid&&(
                         <ListGroup.Item>
+                           
                           {isPending?(<LoadingBox/>):
                           (<div>
 
-                            <PayPalButtons createOrder={createOrder} onApprove={onApprove} onError={onError}>
+                            <PayPalButtons createOrder={createOrder} onApprove={onApprove} onError={onError} disabled={paymentMethod==='CashonDelivery'}>
 
                             </PayPalButtons>
                           </div>)}
-
+                          
                           {loadingPay&&<LoadingBox/>}
 
                         </ListGroup.Item>

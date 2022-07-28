@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 const orderSchema = new mongoose.Schema({
     orderItems: [{
         name: { type: String },
@@ -28,7 +29,7 @@ const orderSchema = new mongoose.Schema({
     shippingPrice: { type: Number },
     taxPrice: { type: Number },
     totalPrice: { type: Number },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
     isPaid: { type: Boolean, default: false },
     paidAt: { type: Date },
     isDelivered: { type: Boolean, default: false },
@@ -36,4 +37,5 @@ const orderSchema = new mongoose.Schema({
 
 }, { timestamps: true });
 const Order = mongoose.model('order', orderSchema);
+
 export default Order;

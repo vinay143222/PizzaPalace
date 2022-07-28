@@ -9,7 +9,7 @@ function Product(props) {
     const { Pizza } = props;
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const { cart: { cartItems } } = state; 
-    
+  
     const addtoCartHandler = async (item) => {
         
         const existItem = cartItems.find((x) => x._id === Pizza._id);
