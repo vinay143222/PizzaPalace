@@ -187,12 +187,7 @@ export default function ProductEditScreen() {
                             required
                         />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="imageFile">
-                        <Form.Label>Upload Image</Form.Label>
-                        <Form.Control type="file" onChange={uploadFileHandler} />
-                        {loadingUpload && <LoadingBox></LoadingBox>}
-                    </Form.Group>
-
+                 
                  
 
                     <Form.Group className="mb-3" controlId="category">
